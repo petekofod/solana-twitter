@@ -1,11 +1,14 @@
 [programs.localnet]
 solana_twitter = "HDtAViACt1piWAfsaJXG4VMUtg3eKgxuCAz57hp3W4yc"
 
+[programs.devnet]
+solana_twitter = "HDtAViACt1piWAfsaJXG4VMUtg3eKgxuCAz57hp3W4yc"
+
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/home/pietro/.config/solana/id.json" 
 
 [scripts]
