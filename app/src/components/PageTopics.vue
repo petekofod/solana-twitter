@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { fetchTweets } from '@/api'
-import { useSlug, useFromRoute } from '@/composables'
+import { topicFilter } from '@/api'
+import { useSlug } from '@/composables'
+import { useFromRoute } from '@/composables'
 import TweetForm from '@/components/TweetForm'
 import TweetList from '@/components/TweetList'
 import TweetSearch from '@/components/TweetSearch'
@@ -24,7 +26,7 @@ const fetchTopicTweets = async () => {
     if (slugTopic.value === viewedTopic.value) return
     try {
         loading.value = true
-        const fetchedTweets = await fetchTweets()
+        const fetchedTweets = await fetchTweets([topicFilter(slugTopic.value)])
         tweets.value = fetchedTweets
         viewedTopic.value = slugTopic.value
     } finally {
