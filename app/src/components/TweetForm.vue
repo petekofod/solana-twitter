@@ -2,7 +2,6 @@
 import { computed, ref, toRefs } from 'vue'
 import { useAutoresizeTextarea, useCountCharacterLimit, useSlug } from '@/composables'
 import { sendTweet } from '@/api'
-import { useWallet } from 'solana-wallets-vue'
 
 // Props.
 const props = defineProps({
@@ -29,7 +28,7 @@ const characterLimitColour = computed(() => {
 })
 
 // Permissions.
-const { connected } = useWallet()
+const connected = ref(true) // TODO: Check connected wallet.
 const canTweet = computed(() => content.value && characterLimit.value > 0)
 
 // Actions.

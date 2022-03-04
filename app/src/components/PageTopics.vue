@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { fetchTweets, topicFilter } from '@/api'
-import { useSlug, useFromRoute } from '@/composables'
+import { fetchTweets } from '@/api'
+import { topicFilter } from '@/api'
+import { useSlug } from '@/composables'
+import { useFromRoute } from '@/composables'
 import TweetForm from '@/components/TweetForm'
 import TweetList from '@/components/TweetList'
 import TweetSearch from '@/components/TweetSearch'
@@ -56,7 +58,7 @@ useFromRoute((route) => {
     </tweet-search>
     <div v-if="viewedTopic">
         <tweet-form @added="addTweet" :forced-topic="viewedTopic"></tweet-form>
-        <tweet-list v-model:tweets="tweets" :loading="loading"></tweet-list>
+        <tweet-list :tweets="tweets" :loading="loading"></tweet-list>
         <div v-if="tweets.length === 0" class="p-8 text-gray-500 text-center">
             No tweets were found in this topic...
         </div>

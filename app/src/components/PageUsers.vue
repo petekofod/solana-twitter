@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { fetchTweets, authorFilter } from '@/api'
+import { fetchTweets } from '@/api'
+import { authorFilter } from '@/api'
 import { useFromRoute } from '@/composables'
 import TweetList from '@/components/TweetList'
 import TweetSearch from '@/components/TweetSearch'
@@ -51,7 +52,7 @@ useFromRoute((route) => {
         </template>
     </tweet-search>
     <div v-if="viewedAuthor">
-        <tweet-list v-model:tweets="tweets" :loading="loading"></tweet-list>
+        <tweet-list :tweets="tweets" :loading="loading"></tweet-list>
         <div v-if="tweets.length === 0" class="p-8 text-gray-500 text-center">
             User not found...
         </div>

@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::system_program;
 
-declare_id!("BNDCEb5uXCuWDxJW9BGmbfvR1JBMAKckfhYrEKW2Bv1W");
+declare_id!("HDtAViACt1piWAfsaJXG4VMUtg3eKgxuCAz57hp3W4yc");
 
 #[program]
 pub mod solana_twitter {
@@ -26,27 +26,6 @@ pub mod solana_twitter {
 
         Ok(())
     }
-
-    pub fn update_tweet(ctx: Context<UpdateTweet>, topic: String, content: String) -> ProgramResult {
-        let tweet: &mut Account<Tweet> = &mut ctx.accounts.tweet;
-
-        if topic.chars().count() > 50 {
-            return Err(ErrorCode::TopicTooLong.into())
-        }
-
-        if content.chars().count() > 280 {
-            return Err(ErrorCode::ContentTooLong.into())
-        }
-
-        tweet.topic = topic;
-        tweet.content = content;
-
-        Ok(())
-    }
-
-    pub fn delete_tweet(_ctx: Context<DeleteTweet>) -> ProgramResult {
-        Ok(())
-    }
 }
 
 #[derive(Accounts)]
@@ -56,21 +35,8 @@ pub struct SendTweet<'info> {
     #[account(mut)]
     pub author: Signer<'info>,
     #[account(address = system_program::ID)]
+    /// CHECK: This is not dangerous because we don't read or write from this account
     pub system_program: AccountInfo<'info>,
-}
-
-#[derive(Accounts)]
-pub struct UpdateTweet<'info> {
-    #[account(mut, has_one = author)]
-    pub tweet: Account<'info, Tweet>,
-    pub author: Signer<'info>,
-}
-
-#[derive(Accounts)]
-pub struct DeleteTweet<'info> {
-    #[account(mut, has_one = author, close = author)]
-    pub tweet: Account<'info, Tweet>,
-    pub author: Signer<'info>,
 }
 
 #[account]

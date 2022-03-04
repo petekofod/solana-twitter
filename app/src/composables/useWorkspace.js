@@ -1,7 +1,9 @@
 import { computed } from 'vue'
 import { useAnchorWallet } from 'solana-wallets-vue'
-import { Connection, PublicKey } from '@solana/web3.js'
-import { Provider, Program } from '@project-serum/anchor'
+import { Connection } from '@solana/web3.js'
+import { PublicKey } from '@solana/web3.js'
+import { Provider } from '@project-serum/anchor'
+import { Program } from '@project-serum/anchor'
 import idl from '@/idl/solana_twitter.json'
 
 const clusterUrl = process.env.VUE_APP_CLUSTER_URL

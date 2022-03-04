@@ -14,6 +14,9 @@ const wallets = [
 
 initWallet({ wallets, autoConnect: true })
 initWorkspace()
+
+
+
 </script>
 
 <template>
